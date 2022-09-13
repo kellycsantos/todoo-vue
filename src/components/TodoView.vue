@@ -39,7 +39,8 @@ export default {
   },
   data() {
     return {
-      tasks: [],
+      tasks: null,
+      tarefas: [],
       newTask: null,
       check: true,
       disabled: true,
@@ -48,7 +49,7 @@ export default {
   methods: {
     addTask() {
       if (Array.isArray(this.tasks)) {
-        this.tasks.push({
+        this.tarefas.push({
           task: this.newTask,
           status: false,
           background: "#ff7878",
@@ -70,7 +71,7 @@ export default {
   },
   watch: {
     newTask(val) {
-        if (val != null && val.length >= 3) {
+        if (val !== null && val.length >= 3) {
           return (this.disabled = false);
         } else {
           this.disabled = true;
@@ -79,7 +80,13 @@ export default {
   },
   mounted() {
     const data = localStorage.getItem("tasks");
-    this.tasks = JSON.parse(data);
+    if(data != null || data != undefined){
+      this.tasks = JSON.parse(data);
+      console.log('Não esta vazio:', data)
+      
+    } else {
+      console.log('vazio')
+    }
   },
 };
 </script>
