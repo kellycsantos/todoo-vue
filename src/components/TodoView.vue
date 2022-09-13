@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     addTask() {
-      if (this.newTask != null) {
+      if (Array.isArray(this.tasks)) {
         this.tasks.push({
           task: this.newTask,
           status: false,
